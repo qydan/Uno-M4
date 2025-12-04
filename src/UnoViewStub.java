@@ -1,12 +1,18 @@
 import java.awt.Color;
+
 /**
  * A stub implementation of UnoView for unit testing.
+ * Captures events instead of displaying them.
+ *
+ * @author Danilo Bukvic Ajan Balaganesh Aydan Eng Aws Ali
+ * @version 4.0
  */
 public class UnoViewStub implements UnoView {
     public UnoEvent lastEvent;
     public String lastInfo;
     public UnoColor wildColorToReturn = UnoColor.RED; // Default to RED
     public boolean handleEndCalled = false;
+    public boolean handleRoundEndCalled = false; // Added for M4
 
     @Override
     public void handleUpdate(UnoEvent e) {
@@ -16,6 +22,12 @@ public class UnoViewStub implements UnoView {
     @Override
     public void handleEnd(String message) {
         this.handleEndCalled = true;
+        this.lastInfo = message;
+    }
+
+    @Override
+    public void handleRoundEnd(String message) {
+        this.handleRoundEndCalled = true;
         this.lastInfo = message;
     }
 
