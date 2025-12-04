@@ -109,7 +109,7 @@ public class UnoModel implements Serializable {
         for (UnoView v : views) v.handleUpdate(event);
     }
 
-    // --- UNDO / REDO LOGIC ---
+    // UNDO / REDO LOGIC
 
     /**
      * Snapshots the current model and pushes it onto the undo stack.
@@ -190,7 +190,7 @@ public class UnoModel implements Serializable {
         this.isDark = restored.isDark;
     }
 
-    // --- GAMEPLAY ACTIONS ---
+    // GAMEPLAY ACTIONS
 
     /**
      * Player attempts to play a card from their hand.
@@ -315,6 +315,7 @@ public class UnoModel implements Serializable {
             case FLIP -> {
                 isDark = !isDark;
                 UnoCard top = discard.peek();
+                assert top != null;
                 activeColor = top.getColor(isDark);
                 // If we flip onto a wild, default to Teal/Red so we don't get stuck
                 if (top.isWild(isDark)) activeColor = isDark ? UnoColor.TEAL : UnoColor.RED;
@@ -348,6 +349,7 @@ public class UnoModel implements Serializable {
                 while(!found) {
                     UnoCard c = popOrRecycle();
                     vp.hand.add(c);
+                    assert c != null;
                     if (c.getColor(isDark) == activeColor) found = true;
                 }
                 nextSteps = 2;
@@ -429,7 +431,7 @@ public class UnoModel implements Serializable {
         }
     }
 
-    // --- HELPER METHODS ---
+    // HELPER METHODS
 
     private int properIndex(int idx) { int n = players.size(); return ((idx % n) + n) % n; }
     private void ensureAwaitingAction() { if (mustPressNext) throw new IllegalStateException("Press next."); }
@@ -469,7 +471,7 @@ public class UnoModel implements Serializable {
         return deck;
     }
 
-    // --- TESTING HELPERS (These are what was missing!) ---
+    // TESTING HELPERS (These are what was missing!)
 
     /**
      * Forcibly sets the top card of the discard pile.

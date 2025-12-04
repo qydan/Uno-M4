@@ -8,7 +8,6 @@ import java.io.IOException;
 /**
  * JUnit tests specifically for Milestone 4 features:
  * Undo, Redo, and Serialization (Save/Load).
- *
  * @author Danilo Bukvic Ajan Balaganesh Aydan Eng Aws Ali
  * @version 4.0
  */
@@ -27,16 +26,16 @@ public class UnoMilestone4Test {
     public void testUndoRedo() {
         int initialSize = view.lastEvent.getHand().size();
 
-        // 1. Draw a card
+        // Draw a card
         model.draw();
         assertEquals("Hand size increases", initialSize + 1, view.lastEvent.getHand().size());
 
-        // 2. Undo
+        // Undo
         assertTrue(model.canUndo());
         model.undo();
         assertEquals("Hand size reverts after undo", initialSize, view.lastEvent.getHand().size());
 
-        // 3. Redo
+        // Redo
         assertTrue(model.canRedo());
         model.redo();
         assertEquals("Hand size increases again after redo", initialSize + 1, view.lastEvent.getHand().size());

@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 /**
  * Test class for UnoModel logic.
  * Updated for M4 to handle Round scoring checks.
- *
  * @author Danilo Bukvic Ajan Balaganesh Aydan Eng Aws Ali
  * @version 4.0
  */

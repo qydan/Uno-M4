@@ -50,7 +50,6 @@ public class UnoCardTest {
         assertTrue(greenFive.matches(top, activeColor, false));
     }
 
-
     /**
      * Tests that a card matches another if they share the same color.
      */

@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -7,6 +8,7 @@ import java.io.Serializable;
  * @version 4.0
  */
 public class UnoCard implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final UnoColor lightColor;

@@ -1,5 +1,6 @@
 import java.util.EventObject;
 import java.util.List;
+
 /**
  * Represents a snapshot of the Uno game state to be sent to the View.
  * @author Ajan Balaganesh Danilo Bukvic Aydan Eng Aws Ali

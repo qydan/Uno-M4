@@ -35,7 +35,7 @@ public class UnoFrame extends JFrame implements UnoView {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 700);
 
-        // -- Setup Menu Bar --
+        //Menu Bar
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem itemSave = new JMenuItem("Save Game");
@@ -55,7 +55,7 @@ public class UnoFrame extends JFrame implements UnoView {
         menuBar.add(gameMenu);
         setJMenuBar(menuBar);
 
-        // -- Setup Players --
+        //Players
         // In a real app we'd probably use a dialog, defaulting to 2 for simplicity here
         int num = 2;
         List<String> names = new ArrayList<>();
@@ -65,7 +65,7 @@ public class UnoFrame extends JFrame implements UnoView {
         UnoModel model = new UnoModel(num, names, isAI);
         controller = new UnoController(model, this);
 
-        // -- Attach Listeners --
+        // Listeners
         itemSave.addActionListener(controller);
         itemLoad.addActionListener(controller);
         menuUndo.addActionListener(controller);
@@ -75,7 +75,7 @@ public class UnoFrame extends JFrame implements UnoView {
         buttonNext.setActionCommand("NEXT");
         buttonNext.addActionListener(controller);
 
-        // -- Layout Components --
+        // Components
         JPanel north = new JPanel(new GridLayout(2, 1));
         JPanel stats = new JPanel(new GridLayout(1, 3));
         stats.add(labelTopCard); stats.add(labelPlayer); stats.add(labelInfo);
