@@ -1,23 +1,25 @@
+import java.io.Serializable;
+
 /**
- * Represents a single Uno card with a color and rank.
- * @author Ajan Balaganesh Danilo Bukvic Aydan Eng Aws Ali
- * @version 3.0
+ * Defines a single Uno card that has two sides: Light and Dark.
+ * Each side has its own color and rank.
+ * @author Danilo Bukvic Ajan Balaganesh Aydan Eng Aws Ali
+ * @version 4.0
  */
-public class UnoCard {
-    // Light
+public class UnoCard implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final UnoColor lightColor;
     private final UnoRank lightRank;
-
-    // Dark
     private final UnoColor darkColor;
     private final UnoRank darkRank;
 
     /**
-     * Constructs a dual-sided Uno Card.
-     * @param lightColor Color on the light side.
-     * @param lightRank Rank on the light side.
-     * @param darkColor Color on the dark side.
-     * @param darkRank Rank on the dark side.
+     * Creates a new card with specific colors and ranks for both the Light and Dark sides.
+     * @param lightColor Color for the light side.
+     * @param lightRank  Rank (number or action) for the light side.
+     * @param darkColor  Color for the dark side.
+     * @param darkRank   Rank (number or action) for the dark side.
      */
     public UnoCard(UnoColor lightColor, UnoRank lightRank, UnoColor darkColor, UnoRank darkRank) {
         this.lightColor = lightColor;
@@ -27,27 +29,28 @@ public class UnoCard {
     }
 
     /**
-     * Gets the color based on the current side.
-     * @param isDark True for dark side, false for light.
-     * @return The active UnoColor.
+     * figuring out which color to return based on whether we are currently on the Dark side.
+     * @param isDark true if the game is currently in Dark mode.
+     * @return the color of the card for the active side.
      */
     public UnoColor getColor(boolean isDark) {
         return isDark ? darkColor : lightColor;
     }
 
     /**
-     * Gets the rank based on the current side.
-     * @param isDark True for dark side, false for light.
-     * @return The active UnoRank.
+     * figuring out which rank to return based on whether we are currently on the Dark side.
+     * @param isDark true if the game is currently in Dark mode.
+     * @return the rank of the card for the active side.
      */
     public UnoRank getRank(boolean isDark) {
         return isDark ? darkRank : lightRank;
     }
 
     /**
-     * Gets the rank based on the current side.
-     * @param isDark True for dark side, false for light.
-     * @return True if card rank is wild, False otherwise.
+     * Checks if this card is considered a Wild card on the current side.
+     * We need this to know if the player should be prompted to pick a color.
+     * @param isDark true if the game is currently in Dark mode.
+     * @return true if the card is a Wild, Wild Draw Two, or Wild Draw Color.
      */
     public boolean isWild(boolean isDark) {
         UnoRank r = getRank(isDark);
@@ -55,55 +58,33 @@ public class UnoCard {
     }
 
     /**
-     * Checks if the card matches the top card.
-     * @param top The top card on the discard pile.
-     * @param activeColor The currently active color (handles Wild overrides).
-     * @param isDark Whether the game is on the dark side.
-     * @return True if playable.
+     * Decides if this card can legally be played on top of another card.
+     * It matches if the colors match, the ranks match, or if this card is Wild.
+     * @param top         The card currently sitting on top of the discard pile.
+     * @param activeColor The color currently required (important if the previous card was Wild).
+     * @param isDark      Whether we are checking against the Dark or Light side.
+     * @return true if this is a valid move.
      */
     public boolean matches(UnoCard top, UnoColor activeColor, boolean isDark) {
-        UnoColor myColor = getColor(isDark);
-        UnoRank myRank = getRank(isDark);
-
         if (isWild(isDark)) return true;
-
-        return myColor == activeColor || myRank == top.getRank(isDark);
+        return getColor(isDark) == activeColor || getRank(isDark) == top.getRank(isDark);
     }
 
     /**
-     * Returns text representation based on side.
-     * @param isDark True for dark side.
-     * @return String description.
+     * Returns a simple string like "RED-FIVE" for the current side.
+     * @param isDark Which side we want the text for.
+     * @return A text description of the card.
      */
     public String toText(boolean isDark) {
         return getColor(isDark) + "-" + getRank(isDark);
     }
 
-
     /**
-     * Returns text representation of card (both sides).
-     * @return String description of both sides of card.
+     * Shows both sides of the card, useful for debugging logs.
+     * Example: "RED-FIVE / TEAL-FIVE"
      */
     @Override
     public String toString() {
         return toText(false) + " / " + toText(true);
     }
-
-    /**
-     * Returns text representation based on side.
-     * @return card's light rank.
-     */
-    public UnoRank getLightRank() {
-        return lightRank;
-    }
-
-    /**
-     * Returns text representation based on side.
-     * @return card's dark rank.
-     */
-    public UnoRank getDarkRank() {
-        return darkRank;
-    }
-
 }
-

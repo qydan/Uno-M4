@@ -1,6 +1,4 @@
-# Uno Game For SYSC 3110 Project Milestone 3
-
-
+# Uno Game For SYSC 3110 Project Milestone 4
 
 ### Team
 
@@ -64,16 +62,20 @@ Uno Flip Game created for the class project for the Carleton University SYSC3110
 ## Deliverables and Roadmap
 
 ### DONE: Milestone 4 (Version 4.0)
-- TBD
+- Replay Functionality (Rounds & Scoring logic)
+- Undo / Redo Functionality
+- Serialization (Save / Load Game)
+- GUI Menu Bar Integration
+- JUnit Tests for new features
 
 ### DONE: Milestone 3 (Version 3.0)
 - Flip Card implemented
 - Draw Five
 - Skip Everyone
-- WIld Draw Colour
+- Wild Draw Colour
 - Updated Scoring System
 - AI player system implemented
-- JUNIT test for Uno Flip 
+- JUNIT test for Uno Flip
 - JUNIT test for AI behaviour
 
 ### DONE: Milestone 2 (Version 2.0)
@@ -89,19 +91,35 @@ Uno Flip Game created for the class project for the Carleton University SYSC3110
 
 ## Changelog
 
+### Milestone 4 (Version 4.0)
+
+#### Added
+- **Undo/Redo System:** Implemented a history stack system using serialization to snapshot game states, allowing players to undo moves and redo them.
+- **Serialization (Save/Load):** Added functionality to save the current game state to a file (`.ser`) and load it back later to resume play.
+- **Scoring & Rounds:** Implemented official scoring rules. When a player empties their hand, the round ends, and points are tallied based on opponents' remaining cards. The game continues in rounds until a player reaches 500 points.
+- **GUI Menu Bar:** Added a `JMenuBar` to the main frame containing "File" (Save, Load) and "Game" (Undo, Redo) options.
+- **JUnit Tests:** Added `UnoMilestone4Test` to verify serialization persistence and undo/redo logic.
+
+#### Changed
+- Updated `UnoModel`, `UnoPlayer`, and `UnoCard` to implement `Serializable`.
+- Refactored `UnoView` interface to include `handleRoundEnd` for intermediate round summaries.
+- Updated `UnoController` to handle `SAVE`, `LOAD`, `UNDO`, and `REDO` commands.
+
+### Milestone 3 (Version 3.0)
+
 #### Added
 - Full Uno Flip special card functionality:
-  - Flip Card (switch all cards between Light and Dark sides)
-  - Draw Five (next player draws 5 cards and loses their turn)
-  - Skip Everyone (all opponents skipped, current player goes again)
-  - Wild Draw Colour (player selects new dark colour; next player draws until matching colour)
+    - Flip Card (switch all cards between Light and Dark sides)
+    - Draw Five (next player draws 5 cards and loses their turn)
+    - Skip Everyone (all opponents skipped, current player goes again)
+    - Wild Draw Colour (player selects new dark colour; next player draws until matching colour)
 - Dual-sided Light/Dark card system and Flip mechanic for the deck and discard pile
 - Updated scoring rules for Uno Flip cards
 - AI Player system supporting 2–4 players, with selection between Human or AI
 - AI legal-move validation and basic strategy for selecting playable cards
 - JUnit tests for:
-  - Uno Flip special cards
-  - AI player behaviour and strategy
+    - Uno Flip special cards
+    - AI player behaviour and strategy
 - Updated UML class diagrams including new card types, AIPlayer, and dual-side card logic
 - New sequence diagrams:
     - Human player plays a Flip Card
@@ -134,7 +152,7 @@ Uno Flip Rules and Scoring: https://www.unorules.com/uno-flip-rules/
 - Sequence Diagram of new MVC implementation
 
 #### Changed
-- Refactored game to use MVC (Model - View - Controller) implementation 
+- Refactored game to use MVC (Model - View - Controller) implementation
 - Updated readme to reflect new changes and documentation
 
 ### Milestone 1 (Version 1.0)
@@ -156,7 +174,7 @@ Uno Flip Rules and Scoring: https://www.unorules.com/uno-flip-rules/
 ## How To Run
 1. **From Source:** Run `Main.java` in your IDE. This will start a playable UNO Game.
 2. **From Executable JAR:**
-    - Locate the `Uno-M3.jar` file (typically found in the `out/artifacts` folder or provided release).
+    - Locate the `Uno-M4.jar` file (typically found in the `out/artifacts` folder or provided release).
     - Open a terminal or command prompt.
     - Navigate to the directory containing the JAR file.
-    - Run the command: `java -jar Uno-M3.jar`
+    - Run the command: `java -jar Uno-M4.jar`
