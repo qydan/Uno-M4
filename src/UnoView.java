@@ -1,40 +1,48 @@
 import java.awt.Color;
+
 /**
- * View interface for Uno.
- * Defines how the model communicates visual/game state updates via UnoEvent.
- * @author Ajan Balaganesh Danilo Bukvic Aydan Eng Aws Ali
- * @version 3.0
+ * The interface that any UI (like our GUI frame) must implement to talk to the Game Model.
+ * This ensures the Model doesn't care exactly how the game is displayed, just that it can send updates.
+ * @author Danilo Bukvic Ajan Balaganesh Aydan Eng Aws Ali
+ * @version 4.0
  */
 public interface UnoView {
 
     /**
-     * Handles a game state update event from the model.
-     * @param e The UnoEvent containing the current game state.
+     * Called whenever the game state changes (card played, drawn, turn change).
+     * The view should update the screen to reflect the new data in the event.
+     * @param e The snapshot of the current game state.
      */
     void handleUpdate(UnoEvent e);
 
     /**
-     * Handles the end of the game.
-     * @param message The winning message.
+     * Called when the entire game is over (someone reached 500 points).
+     * @param message The final winning message to show.
      */
     void handleEnd(String message);
 
     /**
-     * Prompts the user to select a color for a Wild card.
-     * @return The selected UnoColor.
+     * Called when a single round ends, but the game isn't over yet.
+     * @param message The summary of the round and current scores.
+     */
+    void handleRoundEnd(String message);
+
+    /**
+     * Asks the user to pick a color. This pops up when a Wild card is played.
+     * @return The UnoColor the user picked.
      */
     UnoColor promptForWildColor();
 
     /**
-     * Displays an informational message or error to the user.
-     * @param message The message to display.
+     * Shows a generic popup message to the user, like an error or status update.
+     * @param message The text to display.
      */
     void showInfo(String message);
 
     /**
-     * Maps an UnoColor enum to a Java AWT Color.
-     * @param c The UnoColor.
-     * @return The color.
+     * Helper to convert our internal UnoColors to actual Java AWT Colors for painting.
+     * @param c The internal UnoColor.
+     * @return The matching Java Color object.
      */
     Color mapCardColor(UnoColor c);
 }

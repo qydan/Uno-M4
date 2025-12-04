@@ -1,7 +1,7 @@
 /**
  * Represents the rank of a card.
  * @author Danilo Bukvic Ajan Balaganesh Aydan Eng Aws Ali
- * @version 3.0
+ * @version 4.0
  */
 public enum UnoRank {
     ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE,

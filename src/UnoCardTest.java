@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 /**
  * Test class for UnoCard
  * @author Ajan Balaganesh Danilo Bukvic Aydan Eng Aws Ali
- * @version 3.0
+ * @version 4.0
  */
 public class UnoCardTest {
 
